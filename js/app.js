@@ -6,9 +6,13 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
-    this.x = 1 * 101
-    this.y = 2 * 83
+    this.x = (Math.floor(Math.random() * 3)+1) * 25
+    //this.xCell = parseInt(this.x/101)
+    this.y = (Math.floor(Math.random() * 3)+1) * 83
+    //this.yCell = parseInt(this.y/83)
+    
 };
+
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -17,7 +21,27 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     //dt = dt*2
-    this.x += this.x * dt
+    
+    //this.x += this.x * dt*(Math.floor(Math.random() * 3)+1)
+    //if(this.x > 505) {
+        //this.x = (Math.floor(Math.random() * 30)+1);
+    //}
+
+    if(this.x > 505) {
+        this.x = 0
+        
+        
+    } else 
+    {
+
+    }
+    this.x += 1
+    this.y = 83*2
+    this.xCell = parseInt(this.x/101)+1
+    this.yCell = parseInt(this.y/83)
+
+    //console.log(parseInt(this.x/101))
+
 };
 
 // Draw the enemy on the screen, required method for game
@@ -60,6 +84,13 @@ class Player {
                 default:
                     break; 
             }
+            this.xBoxID = (this.xBoxID>4)?this.xBoxID-1:this.xBoxID
+            this.xBoxID = (this.xBoxID<0)?this.xBoxID+1:this.xBoxID
+
+            this.yBoxID = (this.yBoxID==0)?this.yBoxID+5:this.yBoxID
+            this.yBoxID = (this.yBoxID==6)?this.yBoxID-1:this.yBoxID
+
+            console.log(this.yBoxID)
       };
 
       update() {
@@ -78,8 +109,14 @@ class Player {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-const enemy = new Enemy();
-allEnemies = [enemy];
+const enemy1 = new Enemy();
+const enemy2 = new Enemy();
+const enemy3 = new Enemy();
+const enemy4 = new Enemy();
+const enemy5 = new Enemy();
+
+allEnemies = [enemy1]
+//,enemy2,enemy3,enemy4,enemy5];
 
 const player = new Player();
 
