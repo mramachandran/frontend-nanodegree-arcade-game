@@ -10,6 +10,8 @@ var Enemy = function() {
     //this.xCell = parseInt(this.x/101)
     this.y = (Math.floor(Math.random() * 3)+1) * 83
     //this.yCell = parseInt(this.y/83)
+
+    this.speed = (Math.floor(Math.random() * 3)+1)
     
 };
 
@@ -28,15 +30,13 @@ Enemy.prototype.update = function(dt) {
     //}
 
     if(this.x > 505) {
-        this.x = 0
-        
-        
+        this.x = 0 //reset                
     } else 
     {
 
     }
-    this.x += 1
-    this.y = 83*2
+    this.x += 1*this.speed
+    //this.y = 83
     this.xCell = parseInt(this.x/101)+1
     this.yCell = parseInt(this.y/83)
 
@@ -102,6 +102,10 @@ class Player {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);  
       }
 
+      resetPlayerPosition() {
+          this.yBoxID = 5
+      }
+
 }
 
 
@@ -115,7 +119,7 @@ const enemy3 = new Enemy();
 const enemy4 = new Enemy();
 const enemy5 = new Enemy();
 
-allEnemies = [enemy1]
+allEnemies = [enemy1,enemy2,enemy3,enemy4,enemy5]
 //,enemy2,enemy3,enemy4,enemy5];
 
 const player = new Player();

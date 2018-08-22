@@ -105,9 +105,15 @@ var Engine = (function(global) {
             
             if (player.yBoxID == enemy.yCell && player.xBoxID == enemy.xCell){
                 console.log("collision occured");
+                player.resetPlayerPosition();
             }
+            
         });
         player.update();
+    }
+
+    function resetPlayerPosition() {
+
     }
 
     /* This function initially draws the "game level", it will then call
