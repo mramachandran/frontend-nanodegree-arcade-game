@@ -6,11 +6,16 @@ var Enemy = function() {
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
+
+    //the intial position is intiated at a random x and y
     this.x = (Math.floor(Math.random() * 3)+1) * 25
     //this.xCell = parseInt(this.x/101)
     this.y = (Math.floor(Math.random() * 3)+1) * 83
     //this.yCell = parseInt(this.y/83)
 
+    /**
+     * speed parameter - as we want the bugs to travel at different speeds
+     */
     this.speed = (Math.floor(Math.random() * 3)+1)
     
 };
@@ -30,13 +35,15 @@ Enemy.prototype.update = function(dt) {
     //}
 
     if(this.x > 505) {
-        this.x = 0 //reset                
+        this.x = 0 //reset the enemy to give effect that it enters the screen again               
     } else 
     {
 
     }
     this.x += 1*this.speed
     //this.y = 83
+
+    //calculate cell positions 
     this.xCell = parseInt(this.x/101)+1
     this.yCell = parseInt(this.y/83)
 
@@ -65,6 +72,13 @@ class Player {
         this.x = this.xBoxID * this.xBoxIDMultiplier;
         this.y = this.yBoxID * this.yBoxIDMultiplier;
     }
+
+    /*
+     * this is where we capture the key press and move the player accordingly. 
+     * Also, as one of the requirements is to not let the player go off the screen,
+     * I have added constraints. 
+     */
+
     handleInput(keys) {
             console.log(keys)
 
@@ -103,7 +117,7 @@ class Player {
       }
 
       resetPlayerPosition() {
-          this.yBoxID = 5
+          this.yBoxID = 5 //when collision happens, the player is sent back to start all over again but 'x' remains the same
       }
 
 }
