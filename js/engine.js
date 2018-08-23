@@ -96,6 +96,11 @@ var Engine = (function(global) {
         player.update();
     }
 
+    /* Implements collision between player and enemy. The method calcualtes and compares whether
+     * player and enemy are in the same cell. The enemy object proceeds without any effect. However,
+     * the player is reset to original y position along the current x position of the player at the moment. 
+     *
+     */
     function checkCollisions() {
         
         allEnemies.forEach(function(enemy) {
@@ -112,9 +117,6 @@ var Engine = (function(global) {
         player.update();
     }
 
-    function resetPlayerPosition() {
-
-    }
 
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
