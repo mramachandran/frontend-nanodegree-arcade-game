@@ -21,6 +21,7 @@ var Enemy = function() {
 };
 
 
+
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
@@ -71,6 +72,8 @@ class Player {
 
         this.x = this.xBoxID * this.xBoxIDMultiplier;
         this.y = this.yBoxID * this.yBoxIDMultiplier;
+        this.numOfWins = 0;
+        this.numOfCollisions = 0;
     }
 
     /*
@@ -80,7 +83,7 @@ class Player {
      */
 
     handleInput(keys) {
-            console.log(keys)
+            //console.log(keys)
 
             switch(keys) {
                 case 'up':
@@ -101,15 +104,32 @@ class Player {
             this.xBoxID = (this.xBoxID>4)?this.xBoxID-1:this.xBoxID
             this.xBoxID = (this.xBoxID<0)?this.xBoxID+1:this.xBoxID
 
-            this.yBoxID = (this.yBoxID==0)?this.yBoxID+5:this.yBoxID
+            if (this.yBoxID==0) {
+                //player wins                 
+                this.wins();                    
+            } 
+            
             this.yBoxID = (this.yBoxID==6)?this.yBoxID-1:this.yBoxID
-
-            console.log(this.yBoxID)
+            //console.log(this.yBoxID)
       };
 
       update() {
         this.x = this.xBoxID * this.xBoxIDMultiplier;
         this.y = this.yBoxID * this.yBoxIDMultiplier;
+    
+      }
+
+      wins() {
+          this.numOfWins++;
+          this.yBoxID =this.yBoxID+5;
+          console.log(this.numOfWins);
+          this.updateHTMLNumberMessage();
+      }
+
+      lost() {
+        this.resetPlayerPosition();
+        this.numOfCollisions++;
+        this.updateHTMLNumberMessage();
       }
 
       render() {
@@ -119,6 +139,17 @@ class Player {
       resetPlayerPosition() {
           this.yBoxID = 5 //when collision happens, the player is sent back to start all over again but 'x' remains the same
       }
+
+    //This function updates the number of mvoes on the HTML page
+    updateHTMLNumberMessage() {      
+        this.wins_panel = document.getElementsByClassName('score-panel')[0];
+        while (this.wins_panel.firstChild) {
+            this.wins_panel.removeChild(this.wins_panel.firstChild);
+        }
+        this.win_message =  "Number of wins   =   " + this.numOfWins;
+        this.loss_message = "Number of losses =   " + this.numOfCollisions;
+        this.wins_panel.appendChild(document.createTextNode(this.win_message + '\n' + this.loss_message));  
+    }
 
 }
 

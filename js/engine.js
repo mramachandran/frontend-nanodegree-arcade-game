@@ -105,12 +105,13 @@ var Engine = (function(global) {
         
         allEnemies.forEach(function(enemy) {
             //enemy.update(dt);
-            console.log("player " + player.xBoxID + "," + player.yBoxID)
-            console.log("enemy " + enemy.xCell + "," + enemy.yCell)
+            //console.log("player " + player.xBoxID + "," + player.yBoxID)
+            //console.log("enemy " + enemy.xCell + "," + enemy.yCell)
             
             if (player.yBoxID == enemy.yCell && player.xBoxID == enemy.xCell){
                 console.log("collision occured");
-                player.resetPlayerPosition();
+                player.lost();
+                
             }
             
         });
@@ -185,6 +186,7 @@ var Engine = (function(global) {
      */
     function reset() {
         // noop
+        const collision = 0
     }
 
     /* Go ahead and load all of the images we know we're going to need to
