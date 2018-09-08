@@ -104,7 +104,7 @@ class Player {
             this.xBoxID = (this.xBoxID>4)?this.xBoxID-1:this.xBoxID
             this.xBoxID = (this.xBoxID<0)?this.xBoxID+1:this.xBoxID
 
-            if (this.yBoxID==0) {
+            if (this.yBoxID==0) { //when the player reaches the top
                 //player wins                 
                 this.wins();                    
             } 
@@ -119,12 +119,25 @@ class Player {
     
       }
 
+      /*
+       *  When the user wins - a counter is incremented and 
+       *  the html score panel is updated. 
+       */
+          
       wins() {
           this.numOfWins++;
           this.yBoxID =this.yBoxID+5;
           console.log(this.numOfWins);
           this.updateHTMLNumberMessage();
       }
+
+      /*  
+      *  Wehn the user loses because of 'collision', 
+      * the player is just moved back to the starting position along the same y plane 
+      * and the counter that tracks the collision is incremented. 
+      * 
+      */
+
 
       lost() {
         this.resetPlayerPosition();
@@ -140,7 +153,7 @@ class Player {
           this.yBoxID = 5 //when collision happens, the player is sent back to start all over again but 'x' remains the same
       }
 
-    //This function updates the number of mvoes on the HTML page
+    //This function updates the number of wins and losses on the HTML page
     updateHTMLNumberMessage() {      
         this.wins_panel = document.getElementsByClassName('score-panel')[0];
         while (this.wins_panel.firstChild) {
